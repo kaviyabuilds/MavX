@@ -101,6 +101,85 @@ function ManagerDashboard() {
       (t) => t.readiness >= 75
     ).length;
 
+{/* PERFORMANCE OVERVIEW */}
+
+<div className="grid lg:grid-cols-2 gap-8 mb-8">
+
+  <div className="bg-slate-900 border border-white/10 rounded-2xl p-6">
+
+    <h2 className="text-xl font-bold mb-4">
+      🏆 Top Performer
+    </h2>
+
+    <h3 className="text-3xl font-bold text-green-400">
+      {
+        [...trainees].sort(
+          (a, b) =>
+            b.spark_score - a.spark_score
+        )[0]?.name || "N/A"
+      }
+    </h3>
+
+    <p className="text-gray-400 mt-2">
+      Stream: {
+        [...trainees].sort(
+          (a, b) =>
+            b.spark_score - a.spark_score
+        )[0]?.stream
+      }
+    </p>
+
+    <p className="text-5xl font-bold mt-4">
+      {
+        [...trainees].sort(
+          (a, b) =>
+            b.spark_score - a.spark_score
+        )[0]?.spark_score
+      }
+      %
+    </p>
+
+  </div>
+
+  <div className="bg-slate-900 border border-white/10 rounded-2xl p-6">
+
+    <h2 className="text-xl font-bold mb-4">
+      ⚠ Needs Attention
+    </h2>
+
+    <h3 className="text-3xl font-bold text-red-400">
+      {
+        [...trainees].sort(
+          (a, b) =>
+            a.spark_score - b.spark_score
+        )[0]?.name || "N/A"
+      }
+    </h3>
+
+    <p className="text-gray-400 mt-2">
+      Stream: {
+        [...trainees].sort(
+          (a, b) =>
+            a.spark_score - b.spark_score
+        )[0]?.stream
+      }
+    </p>
+
+    <p className="text-5xl font-bold mt-4">
+      {
+        [...trainees].sort(
+          (a, b) =>
+            a.spark_score - b.spark_score
+        )[0]?.spark_score
+      }
+      %
+    </p>
+
+  </div>
+
+</div>
+
+
   // =========================
   // CHART DATA
   // =========================
@@ -156,22 +235,156 @@ function ManagerDashboard() {
     },
   ];
 
+{/* TOP & BOTTOM PERFORMERS */}
+
+<div className="grid lg:grid-cols-2 gap-8 mb-8">
+
+  <div className="bg-slate-900 border border-white/10 rounded-2xl p-6">
+
+    <h2 className="text-xl font-bold mb-6">
+      🥇 Top 5 Toppers
+    </h2>
+
+    <table className="w-full">
+
+      <thead>
+
+        <tr className="text-left text-gray-400">
+
+          <th>Rank</th>
+          <th>Name</th>
+          <th>Score</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        {
+          [...trainees]
+            .sort(
+              (a, b) =>
+                b.spark_score - a.spark_score
+            )
+            .slice(0, 5)
+            .map((t, index) => (
+
+              <tr
+                key={index}
+                className="border-t border-white/10"
+              >
+
+                <td className="py-3">
+                  #{index + 1}
+                </td>
+
+                <td>
+                  {t.name}
+                </td>
+
+                <td className="text-green-400 font-bold">
+                  {t.spark_score}
+                </td>
+
+              </tr>
+
+            ))
+        }
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+  <div className="bg-slate-900 border border-white/10 rounded-2xl p-6">
+
+    <h2 className="text-xl font-bold mb-6">
+      📉 Bottom 5 Performers
+    </h2>
+
+    <table className="w-full">
+
+      <thead>
+
+        <tr className="text-left text-gray-400">
+
+          <th>Rank</th>
+          <th>Name</th>
+          <th>Score</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        {
+          [...trainees]
+            .sort(
+              (a, b) =>
+                a.spark_score - b.spark_score
+            )
+            .slice(0, 5)
+            .map((t, index) => (
+
+              <tr
+                key={index}
+                className="border-t border-white/10"
+              >
+
+                <td className="py-3">
+                  #{index + 1}
+                </td>
+
+                <td>
+                  {t.name}
+                </td>
+
+                <td className="text-red-400 font-bold">
+                  {t.spark_score}
+                </td>
+
+              </tr>
+
+            ))
+        }
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
+
   // =========================
   // AI INSIGHTS
   // =========================
 
-  const aiInsights = [
+const sortedTrainees =
+  [...trainees].sort(
+    (a, b) =>
+      b.spark_score - a.spark_score
+  );
 
-    `Overall readiness improved to ${avgReadiness}% this cycle.`,
+const aiInsights = [
 
-    `${highRisk} trainees are currently categorized as high-risk.`,
+  `${deploymentReady} trainees are deployment ready.`,
 
-    `${deploymentReady} trainees are deployment ready.`,
+  `${highRisk} trainees require immediate intervention.`,
 
-    `Average assessment score is ${avgScore}%.`,
+  `Top performer is ${
+    sortedTrainees[0]?.name || "N/A"
+  } with score ${
+    sortedTrainees[0]?.spark_score || 0
+  }%.`,
 
-    "AI monitoring indicates stable training progression."
-  ];
+  `Average readiness stands at ${avgReadiness}%.`,
+
+  `Overall training progression remains stable across streams.`
+];
 
   // =========================
   // LOGOUT
