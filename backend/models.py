@@ -131,9 +131,7 @@ class Trainee(Base):
 
     stream = Column(String)
 
-    attendance = Column(Float)
 
-    training_stage = Column(String)
 
     spark_score = Column(Float)
 

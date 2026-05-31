@@ -67,10 +67,9 @@ def get_trainees():
 
             "stream": t.stream,
 
-            "attendance": t.attendance,
+            
 
-            "training_stage":
-                t.training_stage,
+            
 
             "spark_score":
                 t.spark_score,

@@ -480,10 +480,7 @@ async def upload_excel(
                     or 1
                 )
 
-                attendance = float(
-                    row.get("Attendance %")
-                    or 85
-                )
+                
 
                 # =========================
                 # CALCULATIONS
@@ -516,7 +513,7 @@ async def upload_excel(
                 readiness = calculate_readiness(
                     assessment_score=avg_score,
                     project_score=project_score,
-                    attendance_score=attendance,
+                   
                     consistency_score=80
                 )
 
