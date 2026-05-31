@@ -69,6 +69,7 @@ from models import Base
 from routers.upload import router as upload_router
 from routers.register import router as register_router
 from routers.auth import router as auth_router
+from routers.export import router as export_router
 from routers.dashboard import router as dashboard_router
 from routers.trainees import router as trainee_router
 """ from routers.auth_routes import router as auth_router
@@ -89,6 +90,7 @@ Base.metadata.create_all(bind=engine)
 
 # Include routers
 app.include_router(upload_router)
+app.include_router(export_router)
 app.include_router(register_router)
 app.include_router(dashboard_router)
 app.include_router(trainee_router)
@@ -96,4 +98,4 @@ app.include_router(auth_router)
 
 @app.get("/")
 def home():
-    return {"message": "MaxX Backend Running"}
+    return {"message": "MavX Backend Running"}
