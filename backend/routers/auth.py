@@ -127,5 +127,6 @@ def login(data: dict):
     return {
         "success": True,
         "name": user.name,
-        "email": user.email
+        "email": user.email,
+        "role": user.role
     }

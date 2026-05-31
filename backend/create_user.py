@@ -15,4 +15,4 @@ db.add(user)
 
 db.commit()
 
-print("User created")
+print("User created") 

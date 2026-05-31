@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from database import SessionLocal
 from models import User
+import re
 
 router = APIRouter()
 
@@ -23,7 +24,7 @@ def register(data: dict):
     password = data["password"]
 
     # STRONG PASSWORD VALIDATION
-    import re
+   
 
     password_regex = (
         r"^(?=.*[a-z])"
@@ -52,7 +53,11 @@ def register(data: dict):
 
         phone=data["phone"],
 
-        password=password
+        password=password,
+        role=data.get(
+            "role",
+            "trainer"
+        )
     )
 
     db.add(new_user)

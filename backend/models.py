@@ -132,3 +132,4 @@ class User(Base):
     phone = Column(String)
 
     password = Column(String)
+    role = Column(String, default="trainer")
