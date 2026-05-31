@@ -19,7 +19,7 @@ import os
 
 DATABASE_URL = os.getenv(
     "DATABASE_URL",
-    "postgresql://postgres:admin123@localhost:5434/mavx"
+    "postgresql://postgres:admin123@localhost:5432/mavx"
 )
 
 engine = create_engine(DATABASE_URL)
